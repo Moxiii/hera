@@ -9,4 +9,5 @@ router.register(r'Sneaker',SneakerViewSet)
 urlpatterns = [
     path('/',include(router.urls) ),
     path('/objet/<int:id>/', GestionObjetView.as_view(), name='gestion_objet'),
+    path('/search', GestionObjetView.as_view(), name="formSearch"),
 ]

@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path , include
 from api import urls
-from render.views import home_page_view
+from render.views import home_page_view,search
 from authentification import urls
 from account import urls
 urlpatterns = [
@@ -26,5 +26,6 @@ urlpatterns = [
     path('auth',include('authentification.urls')),
     path("", home_page_view, name="home"),
     path('account',include('account.urls')),
+    path('search',search,name='search'),
     
 ]

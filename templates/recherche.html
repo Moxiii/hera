@@ -1,0 +1,16 @@
+{%extends 'base.html'%} {%block content%}
+<h2>RECHERCHE</h2>
+<form action="{% url 'formSearch'%}" method="get">
+  <input type="text" name="query" placeholder="Recherche" />
+  <button type="submit">Rechercher</button>
+</form>
+
+{% if results %}
+<ul>
+  {% for item in results %}
+  <li>{{ item.name }}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Aucun résultat trouvé.</p>
+{% endif %} {%endblock content%}
