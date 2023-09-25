@@ -8,4 +8,4 @@ class Sneaker(models.Model):
     link = models.CharField('Link' , max_length=200)
 
     def __str__(self):
-        return f"id: {self.id}| Nom :{self.name}|Prix :{self.price} " 
+        return f"id: {self.id}| Nom :{self.name}" 

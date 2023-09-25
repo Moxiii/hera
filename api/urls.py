@@ -7,6 +7,6 @@ router.register(r'Sneaker',SneakerViewSet)
 
 
 urlpatterns = [
-    path('/get',include(router.urls) ),
+    path('/',include(router.urls) ),
     path('/objet/<int:id>/', GestionObjetView.as_view(), name='gestion_objet'),
 ]
