@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'authentification',
     'scrap',
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -57,12 +58,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'back.urls'
-
+print("Le dossier de template est :")
+print(BASE_DIR.joinpath('templates'))
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR.joinpath('templates')
+             BASE_DIR.joinpath('templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

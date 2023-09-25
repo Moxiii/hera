@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Hera</title>
+  </head>
+  <body>
+    <h1>Hera</h1>
+    <div class="container">
+      <div class="content">{%block content%}{%endblock content%}</div>
+      <div class="auth">
+        {% if user.is_authenticated %}
+        <p>
+          Vous êtes connecté en tant que {{ request.user }}.<br />
+          <a href="{% url 'logout' %}">Se déconnecter</a>
+        </p>
+        {%else%}
+        <p>
+          Pas encore membre ?
+          <a href="{% url 'signup' %}">Inscrivez-vous maintenant !</a>
+        </p>
+        {%endif%}
+      </div>
+    </div>
+  </body>
+</html>
