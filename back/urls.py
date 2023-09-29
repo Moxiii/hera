@@ -25,7 +25,7 @@ urlpatterns = [
     path('api' , include('api.urls')),
     path('auth',include('authentification.urls')),
     path("", home_page_view, name="home"),
-    path('account',include('account.urls')),
-    path('search',search,name='search'),
+    path('accounts',include('account.urls')),
+    path('search/<str:user_token>',search,name='search'),
     
 ]

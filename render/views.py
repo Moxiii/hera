@@ -3,16 +3,15 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from render.SearchForm import SearchForm
 from api.models import Sneaker
+from django.core.cache import cache 
 @login_required
 def home_page_view(request):
     return render(request,'index.html')
 
-def search(request):
-    form = SearchForm(request.GET)
-    results = []
+def search(request,user_token):
+    results = cache.get(user_token)
 
-    # if form.is_valid():
-    #     query = form.cleaned_data['query']
-    #     results = Sneaker.objects.filter(name__icontains=query)
-
-    return render(request, 'recherche.html', {'form': form})
+    if results is not None:
+        return render(request, 'recherche.html', {'results': results})
+    else:
+        return HttpResponse('Aucun résultat trouvé pour cet identifiant utilisateur.')

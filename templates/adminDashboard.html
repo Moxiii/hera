@@ -2,4 +2,6 @@
 <h2>Statistiques</h2>
 <p>Total d'utilisateurs: {{ total_users }}</p>
 <li><a href="/api/Sneaker">Lien vers l'api</a></li>
+<li><a href="/search/{{ request.user.token}}">Lien vers la recherche</a></li>
+<li><a href="/">Home</a></li>
 {% endblock content %}

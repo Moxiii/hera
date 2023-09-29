@@ -9,7 +9,8 @@
       <div class="auth">
         {% if user.is_authenticated %}
         <p>
-          Vous êtes connecté en tant que {{ request.user }}.<br />
+          Vous êtes connecté en tant que {{ request.user.username }}.<br />
+          Votre token {{ request.user.token}}<br/>
           <a href="{% url 'logout' %}">Se déconnecter</a>
         </p>
         {%else%}

@@ -6,7 +6,11 @@ from django.shortcuts import get_object_or_404
 from django.views import View
 from django.http import JsonResponse
 from django.db import models
-# Create your views here.
+# gestion id user
+from authentification.models import User
+from django.core.cache import cache
+# affichage url
+from django.urls import reverse
 class SneakerViewSet(viewsets.ModelViewSet):
     queryset = Sneaker.objects.all()
     serializer_class=SneakerSerializer
@@ -49,15 +53,22 @@ class GestionObjetView(View):
         return JsonResponse({'message': 'Objet mis à jour'})
     def search(self, request):
         query = request.GET.get('query')
-        results = Sneaker.objects.filter(
-            models.Q(name__icontains=query) |  
-            models.Q(price__icontains=query) | 
-            models.Q(link__icontains=query)  
-        )
-        serialized_data = [{
-            'id': objet.id,
-            'name': objet.name,
-            'price': objet.price,
-            'link': objet.link,
-        } for objet in results]
-        return JsonResponse(serialized_data, safe=False)
+        results = None
+        if query is not None:
+            results = Sneaker.objects.filter(
+                models.Q(name__icontains=query) |  
+                models.Q(price__icontains=query) | 
+                models.Q(link__icontains=query)  
+            )
+        user_token = request.user.token
+        form_search_url = reverse('formSearch', args=[user_token])
+        if results is None or not results:
+            # L'utilisateur n'a pas encore effectué de recherche
+            print("no result here")
+            return render(request, 'recherche.html')
+        
+        print(user_token)
+        cache.set(user_token, results, timeout=600)
+
+
+        return JsonResponse({'user_token': user_token, 'results': results})

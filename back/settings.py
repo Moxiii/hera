@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
-    'rest_framework',
     'corsheaders',
     'authentification',
+    'rest_framework',
     'scrap',
     'account',
 ]
@@ -133,3 +133,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'login'
+AUTH_USER_MODEL = 'authentification.User'
